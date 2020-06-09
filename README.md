@@ -73,3 +73,52 @@ db2.example.com
     - 192.168.[4:7].[0:255]
 
 ## Managing Connection setting and Privilage Escilation
+
+### Configuring Ansible
+
+The behaviour of an Ansible installation can be customised by modifying settings in the ansible.cfg file. This will be looked for by ansible in the following places:
+- ./ansible.cfg
+- ~/.ansible.cfg
+- /etc/ansible/ansible.cfg
+
+### Managing settings in the cfg file
+
+- ansible.cfg consists of several sections.
+- Each section contains settings defined as key-value pairs.
+- Section titles are enclosed in square brackets.
+- Basic operations use two sections:
+
+```
+[defaults] sets defaults for Ansible operation.
+[privilege_escalation] configures how Ansible performs privilege escalation on managed hosts.
+```
+
+### Connection settings in the cfg file
+
+Settings to control SSH connections go on the [defaults] section
+
+- `remote_user` specifies the user you want to use on the managed host
+- `remote_port` specifies what port sshd is using on the managed host
+- `ask_pass` controls whether Ansible will prompt you for the SSH password
+
+### Privilege Escalation Settings in the Config file
+
+Setting to control privilege escalation can go on the [privilege_escalation] section:
+- `become` controls whether you will automatically use privilege escalation
+- `become_user` controls what user on the managed host Ansible should become
+- `become_method` controls how Ansible will become that user
+- `become_ask_pass` controls whether to prompt you for a password for your become method.
+
+### Host-Based Connection Variables
+
+- Apply settings specific to a particular host by setting connection variables
+- Place the settings in a file in the host_vars directory in the same directory as the inventory file.
+- These settings override the ones in ansible.cfg
+- They also have slighly different syntax naming
+
+### Host based connection and privilege escalation variables
+
+- `ansible_host` specifies a different IP address or hostname to use for the connection for this host instead of the one in the inventory
+- `ansible_user` specifies the user you want to use on this host
+- `ansible_become_user` specifies the user to become on this host
+- `ansible_become_method` specifies the privilege escalation method to use for this host.

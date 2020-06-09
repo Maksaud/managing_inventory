@@ -10,6 +10,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "controlnode" do |controlnode|
     controlnode.vm.hostname = "controlnode"
     controlnode.vm.network "private_network", ip: "192.168.10.100"
+    controlnode.vm.provision "file", source: "./.vagrant/machines/webserver/virtualbox/private_key", destination: "~/.ssh/webserver_key"
+    controlnode.vm.provision "file", source: "./.vagrant/machines/server/virtualbox/private_key", destination: "~/.ssh/server_key"
   end
 
   config.vm.define "webserver" do |webserver|
