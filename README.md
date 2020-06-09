@@ -34,3 +34,42 @@ inventory = ./inventory
 ```
 
 If the configuration is not set, `/etc/ansible/hosts` will be used
+
+### Creating an INI-formatted Inventory File
+
+- Host groups allow you to collectively automate a set of systems.
+
+- In the following exampe there are two groups, webservers and db_servers
+
+```INI
+[webservers]
+web1.example.com
+web2.example.com
+192.0.2.42
+
+[db_servers]
+db1.example.com
+db2.example.com
+```
+
+### Special Groups and Group Names
+
+- Two host groups exist:
+    - All includes every host in the inventory
+    - ungrouped includes every host in all that is not a member of another group
+- Group names should not include dashes, but underscores are fine.
+
+### Nested groups
+
+- Nested host groups can be added with the `:childeren` suffix.
+
+### Ranges
+
+- It is possible to specify ranges in the host names or IP addresses.
+- Both numeric and alphabetic ranges can be specified.
+- Ranges match values from [START:END]
+- Groups can contain child groups
+- For example.
+    - 192.168.[4:7].[0:255]
+
+## Managing Connection setting and Privilage Escilation
